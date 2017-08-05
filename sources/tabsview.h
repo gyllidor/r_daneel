@@ -27,8 +27,8 @@ signals:
     void tabClickedRight(TabButton*);
 
 public slots:
-    void onViewRootDirChangedFirst(const TabContentListView* ip_tab_view);
-    void onViewRootDirChangedSecond(const TabContentListView* ip_tab_view);
+    void onViewRootDirChangedFirst(const QString &i_new_root_dir);
+    void onViewRootDirChangedSecond(const QString& i_new_root_dir);
     void onAddTab(const QString& i_path);
 
 private slots:
@@ -37,7 +37,7 @@ private slots:
     void onTabRightClicked(TabButton *ip_tab_button);
 
 private:
-    void onViewRootDirChanged(const TabContentListView* ip_tab_view
+    void onViewRootDirChanged(const QString& i_new_root_dir
                               , TabButton*& ip_active_tab_first
                               , TabButton*& ip_active_tab_second);
     TabButton* findFirstExistanceTab(const QString& i_dir);

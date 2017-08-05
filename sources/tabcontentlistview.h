@@ -19,14 +19,14 @@ public:
     QString getRootPath() const;
 
 signals:
-    void tabViewRootChanged(const TabContentListView*);
+    void tabViewRootChanged(const QString&);
     void midClicked(const QString&);
 
 public slots:
     void onTabClicked(TabButton *ip_tab_button);
 
 protected:
-    void mousePressEvent(QMouseEvent* ip_mouse_event);
+    void mousePressEvent(QMouseEvent* ip_mouse_event) override;
     void mouseDoubleClickEvent(QMouseEvent* ip_mouse_event) override;
 
 private:

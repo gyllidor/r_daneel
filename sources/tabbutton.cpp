@@ -20,8 +20,10 @@ QString qp::TabButton::getPath() const
 
 void qp::TabButton::setPath(const QString &i_path)
 {
-    setObjectName(i_path);
-    setText(QFileInfo(i_path).baseName());
+    const QString clean_path = QDir().cleanPath(i_path);
+
+    setObjectName(clean_path);
+    setText(QFileInfo(clean_path).baseName());
 }
 
 void qp::TabButton::mousePressEvent(QMouseEvent *ip_mouse_event)

@@ -8,6 +8,8 @@ qp::TabContentListView::TabContentListView(QWidget *parent)
     , mp_fs_model(new QFileSystemModel())
 {
     mp_fs_model->setFilter(QDir::AllEntries | QDir::NoDot);
+
+    // todo: set from outside
     setModel(mp_fs_model);
 }
 
@@ -67,5 +69,5 @@ void qp::TabContentListView::changeRootDir(const QString &i_new_root_dir)
     setRootIndex(mp_fs_model->index(i_new_root_dir));
     mp_fs_model->setRootPath(i_new_root_dir);
 
-    emit tabViewRootChanged(this);
+    emit tabViewRootChanged(i_new_root_dir);
 }

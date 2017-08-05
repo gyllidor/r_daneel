@@ -23,14 +23,14 @@ void qp::TabsView::Init()
     onTabRightClicked(p_tab_button);
 }
 
-void qp::TabsView::onViewRootDirChangedFirst(const TabContentListView *ip_tab_view)
+void qp::TabsView::onViewRootDirChangedFirst(const QString& i_new_root_dir)
 {
-    onViewRootDirChanged(ip_tab_view, mp_active_tab_first, mp_active_tab_second);
+    onViewRootDirChanged(i_new_root_dir, mp_active_tab_first, mp_active_tab_second);
 }
 
-void qp::TabsView::onViewRootDirChangedSecond(const TabContentListView *ip_tab_view)
+void qp::TabsView::onViewRootDirChangedSecond(const QString& i_new_root_dir)
 {
-    onViewRootDirChanged(ip_tab_view, mp_active_tab_second, mp_active_tab_first);
+    onViewRootDirChanged(i_new_root_dir, mp_active_tab_second, mp_active_tab_first);
 }
 
 void qp::TabsView::onAddTab(const QString &i_path)
@@ -68,11 +68,11 @@ void qp::TabsView::onTabRightClicked(TabButton *ip_tab_button)
     emit tabClickedRight(mp_active_tab_second);
 }
 
-void qp::TabsView::onViewRootDirChanged(const TabContentListView *ip_tab_view
+void qp::TabsView::onViewRootDirChanged(const QString& i_new_root_dir
                                           , TabButton *& ip_active_tab_first
                                           , TabButton *& ip_active_tab_second)
 {
-    if (TabButton* p_tab = findFirstExistanceTab(ip_tab_view->getRootPath()))
+    if (TabButton* p_tab = findFirstExistanceTab(i_new_root_dir))
     {
         ip_active_tab_first = p_tab;
         return;
@@ -80,10 +80,10 @@ void qp::TabsView::onViewRootDirChanged(const TabContentListView *ip_tab_view
 
     const bool tabs_initialised = ip_active_tab_first && ip_active_tab_second;
     if (tabs_initialised && ip_active_tab_first == ip_active_tab_second
-            && ip_active_tab_first->getPath() != ip_tab_view->getRootPath())
-        ip_active_tab_first = addTab(ip_tab_view->getRootPath());
+            && ip_active_tab_first->getPath() != i_new_root_dir)
+        ip_active_tab_first = addTab(i_new_root_dir);
     else
-        ip_active_tab_first->setPath(ip_tab_view->getRootPath());
+        ip_active_tab_first->setPath(i_new_root_dir);
 }
 
 qp::TabButton *qp::TabsView::findFirstExistanceTab(const QString &i_dir)
