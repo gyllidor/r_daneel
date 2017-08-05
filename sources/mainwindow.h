@@ -11,10 +11,13 @@ class TabsController;
 class TabContentTreeView;
 }
 
-namespace Ui {
+namespace Ui
+{
 class MainWindow;
 }
 
+namespace qp
+{
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -26,8 +29,9 @@ public:
 private:
     Ui::MainWindow *ui;
     std::unique_ptr<qp::TabsController> mp_controller_tabs;
-    qp::TabContentTreeView* mp_tab_view_left;
-    qp::TabContentTreeView* mp_tab_view_right;
+    TabContentTreeView* mp_tab_view_left;
+    TabContentTreeView* mp_tab_view_right;
 };
+} // namespace qp
 
 #endif // MAINWINDOW_H

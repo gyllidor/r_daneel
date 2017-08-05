@@ -12,7 +12,7 @@
 #include <QScrollArea>
 #include <QDebug>
 
-MainWindow::MainWindow(QWidget *parent)
+qp::MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
@@ -20,37 +20,37 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->verticalLayout->setAlignment(Qt::AlignTop);
 
-    mp_controller_tabs = std::make_unique<qp::TabsController>(ui->verticalLayout);
-    mp_tab_view_left = new qp::TabContentTreeView(ui->centralWidget);
-    mp_tab_view_right = new qp::TabContentTreeView(ui->centralWidget);
+    mp_controller_tabs = std::make_unique<TabsController>(ui->verticalLayout);
+    mp_tab_view_left = new TabContentTreeView(ui->centralWidget);
+    mp_tab_view_right = new TabContentTreeView(ui->centralWidget);
     mp_tab_view_left->setObjectName(QStringLiteral("tabLiestViewLeft"));
     mp_tab_view_right->setObjectName(QStringLiteral("tabLiestViewRight"));
 
     ui->gridLayout->addWidget(mp_tab_view_left, 0, 0, 1, 1);
     ui->gridLayout->addWidget(mp_tab_view_right, 0, 2, 1, 1);
 
-    connect(mp_controller_tabs.get(), &qp::TabsController::tabClickedLeftBtn
-            , mp_tab_view_left, &qp::TabContentTreeView::onTabClicked);
+    connect(mp_controller_tabs.get(), &TabsController::tabClickedLeftBtn
+            , mp_tab_view_left, &TabContentTreeView::onTabClicked);
 
-    connect(mp_controller_tabs.get(), &qp::TabsController::tabClickedRight
-            , mp_tab_view_right, &qp::TabContentTreeView::onTabClicked);
+    connect(mp_controller_tabs.get(), &TabsController::tabClickedRight
+            , mp_tab_view_right, &TabContentTreeView::onTabClicked);
 
-    connect(mp_tab_view_left, &qp::TabContentTreeView::tabViewRootChanged,
-            mp_controller_tabs.get(), &qp::TabsController::onViewRootDirChangedFirst);
+    connect(mp_tab_view_left, &TabContentTreeView::tabViewRootChanged,
+            mp_controller_tabs.get(), &TabsController::onViewRootDirChangedFirst);
 
-    connect(mp_tab_view_right, &qp::TabContentTreeView::tabViewRootChanged,
-            mp_controller_tabs.get(), &qp::TabsController::onViewRootDirChangedSecond);
+    connect(mp_tab_view_right, &TabContentTreeView::tabViewRootChanged,
+            mp_controller_tabs.get(), &TabsController::onViewRootDirChangedSecond);
 
-    connect(mp_tab_view_left, &qp::TabContentTreeView::midClicked,
-            mp_controller_tabs.get(), &qp::TabsController::onAddTab);
+    connect(mp_tab_view_left, &TabContentTreeView::midClicked,
+            mp_controller_tabs.get(), &TabsController::onAddTab);
 
-    connect(mp_tab_view_right, &qp::TabContentTreeView::midClicked,
-            mp_controller_tabs.get(), &qp::TabsController::onAddTab);
+    connect(mp_tab_view_right, &TabContentTreeView::midClicked,
+            mp_controller_tabs.get(), &TabsController::onAddTab);
 
     mp_controller_tabs->Init();
 }
 
-MainWindow::~MainWindow()
+qp::MainWindow::~MainWindow()
 {
     delete ui;
 }
