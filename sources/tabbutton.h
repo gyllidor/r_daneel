@@ -4,6 +4,9 @@
 #include <QPushButton>
 #include <QMouseEvent>
 
+namespace qp
+{
+
 class TabButton : public QPushButton
 {
     Q_OBJECT
@@ -26,5 +29,7 @@ protected:
 private:
     QString m_dir;
 };
+
+} // namespace qp
 
 #endif // TABBUTTON_H

@@ -3,28 +3,28 @@
 #include <QDir>
 #include <QDebug>
 
-TabButton::TabButton(const QString &i_dir)
+qp::TabButton::TabButton(const QString &i_dir)
     : QPushButton(nullptr)
 {
     setPath(i_dir);
 }
 
-TabButton::~TabButton()
+qp::TabButton::~TabButton()
 {
 }
 
-QString TabButton::getPath() const
+QString qp::TabButton::getPath() const
 {
     return objectName();
 }
 
-void TabButton::setPath(const QString &i_path)
+void qp::TabButton::setPath(const QString &i_path)
 {
     setObjectName(i_path);
     setText(QFileInfo(i_path).baseName());
 }
 
-void TabButton::mousePressEvent(QMouseEvent *ip_mouse_event)
+void qp::TabButton::mousePressEvent(QMouseEvent *ip_mouse_event)
 {
     switch (ip_mouse_event->button())
     {

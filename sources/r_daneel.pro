@@ -16,12 +16,12 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     tabbutton.cpp \
-    controllertabs.cpp \
-    tablistview.cpp
+    tabsview.cpp \
+    tabcontentlistview.cpp
 
 HEADERS  += mainwindow.h \
     tabbutton.h \
-    controllertabs.h \
-    tablistview.h
+    tabsview.h \
+    tabcontentlistview.h
 
 FORMS    += mainwindow.ui

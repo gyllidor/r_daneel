@@ -7,8 +7,11 @@
 
 #include <memory>
 
-class ControllerTabs;
-class TabListView;
+namespace qp
+{
+class TabsView;
+class TabContentListView;
+}
 
 namespace Ui {
 class MainWindow;
@@ -24,9 +27,9 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    std::unique_ptr<ControllerTabs> mp_controller_tabs;
-    TabListView* mp_tab_view_left;
-    TabListView* mp_tab_view_right;
+    std::unique_ptr<qp::TabsView> mp_controller_tabs;
+    qp::TabContentListView* mp_tab_view_left;
+    qp::TabContentListView* mp_tab_view_right;
 };
 
 #endif // MAINWINDOW_H

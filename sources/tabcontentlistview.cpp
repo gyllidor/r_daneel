@@ -1,8 +1,9 @@
-#include "tablistview.h"
+#include "tabcontentlistview.h"
+#include "tabbutton.h"
 
 #include <QDebug>
 
-TabListView::TabListView(QWidget *parent)
+qp::TabContentListView::TabContentListView(QWidget *parent)
     : QListView(parent)
     , mp_fs_model(new QFileSystemModel())
 {
@@ -10,24 +11,24 @@ TabListView::TabListView(QWidget *parent)
     setModel(mp_fs_model);
 }
 
-TabListView::~TabListView()
+qp::TabContentListView::~TabContentListView()
 {
     delete mp_fs_model;
 }
 
-QString TabListView::getRootPath() const
+QString qp::TabContentListView::getRootPath() const
 {
     return mp_fs_model->rootPath();
 }
 
-void TabListView::onTabClicked(TabButton *ip_tab_button)
+void qp::TabContentListView::onTabClicked(TabButton *ip_tab_button)
 {
     qDebug() << __FUNCTION__ << ip_tab_button->getPath();
 
     changeRootDir(ip_tab_button->getPath());
 }
 
-void TabListView::mousePressEvent(QMouseEvent *ip_mouse_event)
+void qp::TabContentListView::mousePressEvent(QMouseEvent *ip_mouse_event)
 {
     if (ip_mouse_event->button() == Qt::MidButton)
         onMidClicked(indexAt(ip_mouse_event->pos()));
@@ -35,13 +36,13 @@ void TabListView::mousePressEvent(QMouseEvent *ip_mouse_event)
         QListView::mousePressEvent(ip_mouse_event);
 }
 
-void TabListView::mouseDoubleClickEvent(QMouseEvent *ip_mouse_event)
+void qp::TabContentListView::mouseDoubleClickEvent(QMouseEvent *ip_mouse_event)
 {
     if (ip_mouse_event->button() == Qt::LeftButton)
         onLeftDoubleClicked(indexAt(ip_mouse_event->pos()));
 }
 
-void TabListView::onLeftDoubleClicked(const QModelIndex &i_index)
+void qp::TabContentListView::onLeftDoubleClicked(const QModelIndex &i_index)
 {
     if (!i_index.isValid())
         return;
@@ -51,7 +52,7 @@ void TabListView::onLeftDoubleClicked(const QModelIndex &i_index)
         changeRootDir(path);
 }
 
-void TabListView::onMidClicked(const QModelIndex &i_index)
+void qp::TabContentListView::onMidClicked(const QModelIndex &i_index)
 {
     if (!i_index.isValid())
         return;
@@ -61,7 +62,7 @@ void TabListView::onMidClicked(const QModelIndex &i_index)
         emit midClicked(path);
 }
 
-void TabListView::changeRootDir(const QString &i_new_root_dir)
+void qp::TabContentListView::changeRootDir(const QString &i_new_root_dir)
 {
     setRootIndex(mp_fs_model->index(i_new_root_dir));
     mp_fs_model->setRootPath(i_new_root_dir);

@@ -1,22 +1,25 @@
 #ifndef TABVIEW_H
 #define TABVIEW_H
 
-#include "tabbutton.h"
-
 #include <QListView>
 #include <QFileSystemModel>
 
-class TabListView : public QListView
+namespace qp
+{
+
+class TabButton;
+
+class TabContentListView : public QListView
 {
     Q_OBJECT
 public:
-    explicit TabListView(QWidget *parent = 0);
-    ~TabListView();
+    explicit TabContentListView(QWidget *parent = 0);
+    ~TabContentListView();
 
     QString getRootPath() const;
 
 signals:
-    void tabViewRootChanged(const TabListView*);
+    void tabViewRootChanged(const TabContentListView*);
     void midClicked(const QString&);
 
 public slots:
@@ -34,5 +37,7 @@ private:
 private:
     QFileSystemModel* mp_fs_model;
 };
+
+} // namespace qp
 
 #endif // TABVIEW_H

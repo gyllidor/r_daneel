@@ -1,21 +1,24 @@
 #ifndef CONTROLLERTABS_H
 #define CONTROLLERTABS_H
 
-#include "tabbutton.h"
-#include "tablistview.h"
+#include "tabcontentlistview.h"
 
 #include <QLayout>
 
 #include <set>
 #include <memory>
 
-class ControllerTabs : public QObject
+namespace qp
+{
+class TabButton;
+
+class TabsView : public QObject
 {
     Q_OBJECT
 
 public:
-    ControllerTabs(QLayout* ip_layout_tabs);
-    virtual ~ControllerTabs();
+    TabsView(QLayout* ip_layout_tabs);
+    virtual ~TabsView();
 
     void Init();
 
@@ -24,8 +27,8 @@ signals:
     void tabClickedRight(TabButton*);
 
 public slots:
-    void onViewRootDirChangedFirst(const TabListView* ip_tab_view);
-    void onViewRootDirChangedSecond(const TabListView* ip_tab_view);
+    void onViewRootDirChangedFirst(const TabContentListView* ip_tab_view);
+    void onViewRootDirChangedSecond(const TabContentListView* ip_tab_view);
     void onAddTab(const QString& i_path);
 
 private slots:
@@ -34,7 +37,7 @@ private slots:
     void onTabRightClicked(TabButton *ip_tab_button);
 
 private:
-    void onViewRootDirChanged(const TabListView* ip_tab_view
+    void onViewRootDirChanged(const TabContentListView* ip_tab_view
                               , TabButton*& ip_active_tab_first
                               , TabButton*& ip_active_tab_second);
     TabButton* findFirstExistanceTab(const QString& i_dir);
@@ -45,5 +48,7 @@ private:
     TabButton* mp_active_tab_first;
     TabButton* mp_active_tab_second;
 };
+
+} // namespace qp
 
 #endif // CONTROLLERTABS_H
