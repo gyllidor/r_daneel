@@ -2,15 +2,13 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QFileSystemModel>
-#include <QListView>
 
 #include <memory>
 
 namespace qp
 {
-class TabsView;
-class TabContentListView;
+class TabsController;
+class TabContentTreeView;
 }
 
 namespace Ui {
@@ -27,9 +25,9 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    std::unique_ptr<qp::TabsView> mp_controller_tabs;
-    qp::TabContentListView* mp_tab_view_left;
-    qp::TabContentListView* mp_tab_view_right;
+    std::unique_ptr<qp::TabsController> mp_controller_tabs;
+    qp::TabContentTreeView* mp_tab_view_left;
+    qp::TabContentTreeView* mp_tab_view_right;
 };
 
 #endif // MAINWINDOW_H

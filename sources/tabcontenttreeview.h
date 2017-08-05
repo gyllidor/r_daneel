@@ -1,20 +1,20 @@
-#ifndef TABVIEW_H
-#define TABVIEW_H
+#ifndef TABCONTENTTREEVIEW_H
+#define TABCONTENTTREEVIEW_H
 
-#include <QListView>
-#include <QFileSystemModel>
+#include <QTreeView>
+
+class QFileSystemModel;
 
 namespace qp
 {
-
 class TabButton;
 
-class TabContentListView : public QListView
+class TabContentTreeView : public QTreeView
 {
     Q_OBJECT
 public:
-    explicit TabContentListView(QWidget *parent = 0);
-    ~TabContentListView();
+    TabContentTreeView(QWidget* parent = 0);
+    ~TabContentTreeView();
 
     QString getRootPath() const;
 
@@ -23,7 +23,7 @@ signals:
     void midClicked(const QString&);
 
 public slots:
-    void onTabClicked(TabButton *ip_tab_button);
+    void onTabClicked(TabButton* ip_tab_button);
 
 protected:
     void mousePressEvent(QMouseEvent* ip_mouse_event) override;
@@ -38,6 +38,6 @@ private:
     QFileSystemModel* mp_fs_model;
 };
 
-} // namespace qp
+} // namesapce qp
 
-#endif // TABVIEW_H
+#endif // TABCONTENTTREEVIEW_H

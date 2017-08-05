@@ -2,7 +2,8 @@
 #define TABBUTTON_H
 
 #include <QPushButton>
-#include <QMouseEvent>
+
+class QMouseEvent;
 
 namespace qp
 {

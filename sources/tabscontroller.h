@@ -1,24 +1,21 @@
 #ifndef CONTROLLERTABS_H
 #define CONTROLLERTABS_H
 
-#include "tabcontentlistview.h"
+#include <QObject>
 
-#include <QLayout>
-
-#include <set>
-#include <memory>
+class QLayout;
 
 namespace qp
 {
 class TabButton;
 
-class TabsView : public QObject
+class TabsController : public QObject
 {
     Q_OBJECT
 
 public:
-    TabsView(QLayout* ip_layout_tabs);
-    virtual ~TabsView();
+    TabsController(QLayout* ip_layout_tabs);
+    virtual ~TabsController();
 
     void Init();
 

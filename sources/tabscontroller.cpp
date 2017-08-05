@@ -1,10 +1,12 @@
-#include "tabsview.h"
+#include "tabscontroller.h"
 #include "tabbutton.h"
 
+#include <QMouseEvent>
+#include <QLayout>
 #include <QDir>
 #include <QDebug>
 
-qp::TabsView::TabsView(QLayout *ip_layout_tabs)
+qp::TabsController::TabsController(QLayout *ip_layout_tabs)
     : QObject()
     , mp_layout_tabs(ip_layout_tabs)
     , mp_active_tab_first(nullptr)
@@ -12,41 +14,39 @@ qp::TabsView::TabsView(QLayout *ip_layout_tabs)
 {
 }
 
-qp::TabsView::~TabsView()
+qp::TabsController::~TabsController()
 {
 }
 
-void qp::TabsView::Init()
+void qp::TabsController::Init()
 {
     auto p_tab_button = addTab(QDir::homePath());
     onTabLeftClicked(p_tab_button);
     onTabRightClicked(p_tab_button);
 }
 
-void qp::TabsView::onViewRootDirChangedFirst(const QString& i_new_root_dir)
+void qp::TabsController::onViewRootDirChangedFirst(const QString& i_new_root_dir)
 {
     onViewRootDirChanged(i_new_root_dir, mp_active_tab_first, mp_active_tab_second);
 }
 
-void qp::TabsView::onViewRootDirChangedSecond(const QString& i_new_root_dir)
+void qp::TabsController::onViewRootDirChangedSecond(const QString& i_new_root_dir)
 {
     onViewRootDirChanged(i_new_root_dir, mp_active_tab_second, mp_active_tab_first);
 }
 
-void qp::TabsView::onAddTab(const QString &i_path)
+void qp::TabsController::onAddTab(const QString &i_path)
 {
     addTab(i_path);
 }
 
-void qp::TabsView::onTabLeftClicked(TabButton *ip_tab_button)
+void qp::TabsController::onTabLeftClicked(TabButton *ip_tab_button)
 {
-    qDebug() << __FUNCTION__ << ip_tab_button->getPath();
-
     mp_active_tab_first = ip_tab_button;
     emit tabClickedLeftBtn(mp_active_tab_first);
 }
 
-void qp::TabsView::onTabMidClicked(TabButton *ip_tab_button)
+void qp::TabsController::onTabMidClicked(TabButton *ip_tab_button)
 {
     mp_layout_tabs->removeWidget(ip_tab_button);
     ip_tab_button->deleteLater();
@@ -56,19 +56,15 @@ void qp::TabsView::onTabMidClicked(TabButton *ip_tab_button)
         onTabLeftClicked(p_tab_button);
         onTabRightClicked(p_tab_button);
     }
-
-    qDebug() << __FUNCTION__;
 }
 
-void qp::TabsView::onTabRightClicked(TabButton *ip_tab_button)
+void qp::TabsController::onTabRightClicked(TabButton *ip_tab_button)
 {
-    qDebug() << __FUNCTION__ << ip_tab_button->getPath();
-
     mp_active_tab_second = ip_tab_button;
     emit tabClickedRight(mp_active_tab_second);
 }
 
-void qp::TabsView::onViewRootDirChanged(const QString& i_new_root_dir
+void qp::TabsController::onViewRootDirChanged(const QString& i_new_root_dir
                                           , TabButton *& ip_active_tab_first
                                           , TabButton *& ip_active_tab_second)
 {
@@ -86,7 +82,7 @@ void qp::TabsView::onViewRootDirChanged(const QString& i_new_root_dir
         ip_active_tab_first->setPath(i_new_root_dir);
 }
 
-qp::TabButton *qp::TabsView::findFirstExistanceTab(const QString &i_dir)
+qp::TabButton *qp::TabsController::findFirstExistanceTab(const QString &i_dir)
 {
     for (int i = 0; i < mp_layout_tabs->count(); ++i)
     {
@@ -99,7 +95,7 @@ qp::TabButton *qp::TabsView::findFirstExistanceTab(const QString &i_dir)
     return nullptr;
 }
 
-qp::TabButton *qp::TabsView::addTab(const QString &i_dir)
+qp::TabButton *qp::TabsController::addTab(const QString &i_dir)
 {
     auto p_tab_button = new TabButton(i_dir);
     connect(p_tab_button, SIGNAL(leftClicked(TabButton*)),
@@ -112,7 +108,6 @@ qp::TabButton *qp::TabsView::addTab(const QString &i_dir)
             this, SLOT(onTabRightClicked(TabButton*)));
 
     mp_layout_tabs->addWidget(p_tab_button);
-    qDebug() << mp_layout_tabs->count();
 
     return p_tab_button;
 }
