@@ -2,6 +2,7 @@
 
 #include <QMouseEvent>
 #include <QDir>
+
 #include <QDebug>
 
 qp::TabButton::TabButton(const QString &i_dir)
@@ -22,7 +23,7 @@ QString qp::TabButton::getPath() const
 void qp::TabButton::setPath(const QString &i_path)
 {
     setObjectName(i_path);
-    setText(QFileInfo(i_path).baseName());
+    setText(QDir::rootPath() != i_path ? QFileInfo(i_path).baseName() : QString("/"));
 }
 
 void qp::TabButton::mousePressEvent(QMouseEvent *ip_mouse_event)

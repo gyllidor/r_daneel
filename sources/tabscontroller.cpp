@@ -4,7 +4,6 @@
 #include <QMouseEvent>
 #include <QLayout>
 #include <QDir>
-#include <QDebug>
 
 qp::TabsController::TabsController(QLayout *ip_layout_tabs)
     : QObject()

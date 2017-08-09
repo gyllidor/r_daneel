@@ -5,13 +5,6 @@
 #include "tabbutton.h"
 #include "tabcontenttreeview.h"
 
-#include <QGridLayout>
-#include <QPushButton>
-#include <QListView>
-#include <QFileSystemModel>
-#include <QScrollArea>
-#include <QDebug>
-
 qp::MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)

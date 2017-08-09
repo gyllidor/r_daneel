@@ -3,8 +3,7 @@
 
 #include <QMouseEvent>
 #include <QFileSystemModel>
-
-#include <QDebug>
+#include <QDesktopServices>
 
 qp::TabContentTreeView::TabContentTreeView(QWidget *parent)
     : QTreeView(parent)
@@ -16,6 +15,7 @@ qp::TabContentTreeView::TabContentTreeView(QWidget *parent)
 
     // todo: set from outside
     setModel(mp_fs_model);
+    setColumnWidth(0, 300);
 }
 
 qp::TabContentTreeView::~TabContentTreeView()
@@ -55,6 +55,8 @@ void qp::TabContentTreeView::onLeftDoubleClicked(const QModelIndex &i_index)
     const auto path = mp_fs_model->fileInfo(i_index).absoluteFilePath();
     if (QFileInfo(path).isDir())
         changeRootDir(path);
+    else
+        QDesktopServices::openUrl(QUrl(QUrl::fromLocalFile(path)));
 }
 
 void qp::TabContentTreeView::onMidClicked(const QModelIndex &i_index)
@@ -72,6 +74,7 @@ void qp::TabContentTreeView::changeRootDir(const QString &i_new_root_dir)
     const auto current_index = mp_fs_model->setRootPath(i_new_root_dir);
     setRootIndex(current_index);
     setCurrentIndex(current_index);
+    collapseAll();
 
     emit tabViewRootChanged(i_new_root_dir);
 }
