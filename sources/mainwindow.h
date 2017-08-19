@@ -28,9 +28,7 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    std::unique_ptr<qp::TabsController> mp_controller_tabs;
-    TabContentTreeView* mp_tab_view_left;
-    TabContentTreeView* mp_tab_view_right;
+
 };
 } // namespace qp
 

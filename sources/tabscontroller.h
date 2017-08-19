@@ -21,12 +21,13 @@ public:
 
 signals:
     void tabClickedLeftBtn(TabButton*);
-    void tabClickedRight(TabButton*);
+    void tabClickedRightBtn(TabButton*);
 
 public slots:
     void onViewRootDirChangedFirst(const QString &i_new_root_dir);
     void onViewRootDirChangedSecond(const QString& i_new_root_dir);
     void onAddTab(const QString& i_path);
+    void onDirRemoved(const QString& i_dir);
 
 private slots:
     void onTabLeftClicked(TabButton *ip_tab_button);
@@ -34,11 +35,11 @@ private slots:
     void onTabRightClicked(TabButton *ip_tab_button);
 
 private:
-    void onViewRootDirChanged(const QString& i_new_root_dir
+    void _onViewRootDirChanged(const QString& i_new_root_dir
                               , TabButton*& ip_active_tab_first
                               , TabButton*& ip_active_tab_second);
-    TabButton* findFirstExistanceTab(const QString& i_dir);
-    TabButton* addTab(const QString& i_dir);
+    TabButton* _findFirstExistanceTab(const QString& i_dir);
+    TabButton* _addTab(const QString& i_dir);
 
 private:
     QLayout* mp_layout_tabs;
