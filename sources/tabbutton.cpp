@@ -9,6 +9,7 @@ qp::TabButton::TabButton(const QString &i_dir)
     : QPushButton(nullptr)
 {
     setPath(i_dir);
+    setFocusPolicy(Qt::FocusPolicy::NoFocus);
 }
 
 qp::TabButton::~TabButton()

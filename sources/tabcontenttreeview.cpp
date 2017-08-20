@@ -139,8 +139,8 @@ void qp::TabContentTreeView::_onPressDelete() const
         if (QFileInfo(file).isDir())
         {
             QDir dir(file);
-            dir.removeRecursively();
-            dirRemoved(file);
+            if (dir.removeRecursively())
+                dirRemoved(file);
         }
         else
         {

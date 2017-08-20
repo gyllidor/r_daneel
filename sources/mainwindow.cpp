@@ -47,10 +47,10 @@ qp::MainWindow::MainWindow(QWidget *parent)
             , p_tab_view_right, &TabContentTreeView::onTabClicked);
 
     connect(p_tab_view_left, &TabContentTreeView::tabViewRootChanged,
-            p_controller_tabs, &TabsController::onViewRootDirChangedFirst);
+            p_controller_tabs, &TabsController::onViewRootDirChangedLeft);
 
     connect(p_tab_view_right, &TabContentTreeView::tabViewRootChanged,
-            p_controller_tabs, &TabsController::onViewRootDirChangedSecond);
+            p_controller_tabs, &TabsController::onViewRootDirChangedRight);
 
     connect(p_tab_view_left, &TabContentTreeView::midClicked,
             p_controller_tabs, &TabsController::onAddTab);
