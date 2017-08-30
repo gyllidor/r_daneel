@@ -1,0 +1,26 @@
+qp--TabButton
+{
+    height: 25px;
+    border: none;
+}
+
+qp--TabButton[m_activated_by="0"]:hover
+{
+
+    background-color: rgba(200, 200, 255, 40);
+}
+
+qp--TabButton[m_activated_by="1"]
+{
+    background-color: orange;
+}
+
+qp--TabButton[m_activated_by="2"]
+{
+    background-color: red;
+}
+
+qp--TabButton[m_activated_by="3"]
+{
+    background-color: green;
+}

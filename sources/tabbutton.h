@@ -11,6 +11,16 @@ namespace qp
 class TabButton : public QPushButton
 {
     Q_OBJECT
+    Q_PROPERTY(int m_activated_by READ getActivatedBy WRITE setActivatedBy)
+
+public:
+    enum EActivatedBy
+    {
+        EA_NONE = 0,
+        EA_LEFT,
+        EA_RIGHT,
+        EA_LEFT_RIGHT
+    };
 
 public:
     TabButton(const QString& i_dir);
@@ -18,6 +28,9 @@ public:
 
     QString getPath() const;
     void setPath(const QString& i_path);
+
+    void setActivatedBy(int i_activated_by);
+    int getActivatedBy() const;
 
 signals:
     void leftClicked(TabButton*);
@@ -29,6 +42,7 @@ protected:
 
 private:
     QString m_dir;
+    int m_activated_by;
 };
 
 } // namespace qp

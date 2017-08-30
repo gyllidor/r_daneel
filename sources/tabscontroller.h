@@ -40,7 +40,7 @@ private:
                               , TabButton*& ip_active_tab_second);
     TabButton* _findFirstExistanceTab(const QString& i_dir);
     TabButton* _addTab(const QString& i_dir);
-    void _updateStyleSheetForActiveTabs();
+    void _updateTabsStateActivatedBy();
 
 private:
     QLayout* mp_layout_tabs;

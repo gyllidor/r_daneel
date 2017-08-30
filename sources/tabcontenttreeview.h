@@ -22,7 +22,7 @@ public:
     void setModel(QAbstractItemModel* ip_model) override;
 
 signals:
-    void tabViewRootChanged(const QString&);
+    void tabRootContentChanged(const QString&);
     void midClicked(const QString&);
     void dirRemoved(const QString&) const;
 

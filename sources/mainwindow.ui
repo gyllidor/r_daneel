@@ -64,6 +64,12 @@
         <verstretch>0</verstretch>
        </sizepolicy>
       </property>
+      <property name="minimumSize">
+       <size>
+        <width>150</width>
+        <height>0</height>
+       </size>
+      </property>
       <property name="verticalScrollBarPolicy">
        <enum>Qt::ScrollBarAlwaysOff</enum>
       </property>
@@ -78,7 +84,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>68</width>
+         <width>148</width>
          <height>567</height>
         </rect>
        </property>

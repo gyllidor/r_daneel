@@ -7,6 +7,7 @@
 
 qp::TabButton::TabButton(const QString &i_dir)
     : QPushButton(nullptr)
+    , m_activated_by(EActivatedBy::EA_NONE)
 {
     setPath(i_dir);
     setFocusPolicy(Qt::FocusPolicy::NoFocus);
@@ -25,6 +26,16 @@ void qp::TabButton::setPath(const QString &i_path)
 {
     setObjectName(i_path);
     setText(QDir::rootPath() != i_path ? QFileInfo(i_path).baseName() : QDir::rootPath());
+}
+
+void qp::TabButton::setActivatedBy(int i_activated_by)
+{
+    m_activated_by = i_activated_by;
+}
+
+int qp::TabButton::getActivatedBy() const
+{
+    return m_activated_by;
 }
 
 void qp::TabButton::mousePressEvent(QMouseEvent *ip_mouse_event)

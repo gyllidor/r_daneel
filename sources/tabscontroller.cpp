@@ -97,7 +97,7 @@ void qp::TabsController::_onViewRootDirChanged(const QString& i_new_root_dir
         ip_active_tab_first->setPath(i_new_root_dir);
     }
 
-    _updateStyleSheetForActiveTabs();
+    _updateTabsStateActivatedBy();
 }
 
 qp::TabButton *qp::TabsController::_findFirstExistanceTab(const QString &i_dir)
@@ -123,23 +123,20 @@ qp::TabButton *qp::TabsController::_addTab(const QString &i_dir)
     return p_tab_button;
 }
 
-void qp::TabsController::_updateStyleSheetForActiveTabs()
+void qp::TabsController::_updateTabsStateActivatedBy()
 {
     const auto parent = mp_layout_tabs->parent();
     for (auto p_tab_button : parent->findChildren<TabButton*>(QString(), Qt::FindDirectChildrenOnly))
-        p_tab_button->setStyleSheet("");
-
-    // create custom states for TabButton
-    if (mp_active_tab_left == mp_active_tab_right)
     {
-        mp_active_tab_left->setStyleSheet("background-color: #ff7700;");
-        mp_active_tab_right->setStyleSheet("background-color: #ff7700;");
-        return;
+        if (p_tab_button == mp_active_tab_left && p_tab_button == mp_active_tab_right)
+            p_tab_button->setActivatedBy(TabButton::EActivatedBy::EA_LEFT_RIGHT);
+        else if (p_tab_button == mp_active_tab_left)
+            p_tab_button->setActivatedBy(TabButton::EActivatedBy::EA_LEFT);
+        else if (p_tab_button == mp_active_tab_right)
+            p_tab_button->setActivatedBy(TabButton::EActivatedBy::EA_RIGHT);
+        else
+            p_tab_button->setActivatedBy(TabButton::EActivatedBy::EA_NONE);
+
+        p_tab_button->style()->polish(p_tab_button);
     }
-
-    if (mp_active_tab_left)
-        mp_active_tab_left->setStyleSheet("background-color: #00b24d;");
-
-    if (mp_active_tab_right)
-        mp_active_tab_right->setStyleSheet("background-color: #0070bb;");
 }

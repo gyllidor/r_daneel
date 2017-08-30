@@ -26,6 +26,13 @@ qp::MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    QFile file_style(":/tab_button.qss");
+    QString style;
+    if (file_style.open(QFile::ReadOnly))
+        style = file_style.readAll();
+
+    setStyleSheet(style);
+
     ui->verticalLayout->setAlignment(Qt::AlignTop);
 
     auto p_controller_tabs = new TabsController(ui->verticalLayout);
@@ -46,10 +53,10 @@ qp::MainWindow::MainWindow(QWidget *parent)
     connect(p_controller_tabs, &TabsController::tabClickedRightBtn
             , p_tab_view_right, &TabContentTreeView::onTabClicked);
 
-    connect(p_tab_view_left, &TabContentTreeView::tabViewRootChanged,
+    connect(p_tab_view_left, &TabContentTreeView::tabRootContentChanged,
             p_controller_tabs, &TabsController::onViewRootDirChangedLeft);
 
-    connect(p_tab_view_right, &TabContentTreeView::tabViewRootChanged,
+    connect(p_tab_view_right, &TabContentTreeView::tabRootContentChanged,
             p_controller_tabs, &TabsController::onViewRootDirChangedRight);
 
     connect(p_tab_view_left, &TabContentTreeView::midClicked,

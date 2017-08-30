@@ -25,3 +25,6 @@ HEADERS  += mainwindow.h \
     tabscontroller.h
 
 FORMS    += mainwindow.ui
+
+RESOURCES += \
+    stylesheets.qrc

@@ -35,6 +35,7 @@ void qp::TabContentTreeView::setModel(QAbstractItemModel *ip_model)
 void qp::TabContentTreeView::onTabClicked(qp::TabButton *ip_tab_button)
 {
     _changeRootDir(ip_tab_button->getPath());
+    setFocus();
 }
 
 void qp::TabContentTreeView::mousePressEvent(QMouseEvent *ip_mouse_event)
@@ -124,7 +125,7 @@ void qp::TabContentTreeView::_changeRootDir(const QString &i_new_root_dir)
     setCurrentIndex(current_index);
     collapseAll();
 
-    emit tabViewRootChanged(i_new_root_dir);
+    emit tabRootContentChanged(i_new_root_dir);
 }
 
 void qp::TabContentTreeView::_onPressDelete() const
