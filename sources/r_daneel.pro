@@ -17,12 +17,14 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     tabbutton.cpp \
     tabcontenttreeview.cpp \
-    tabscontroller.cpp
+    tabscontroller.cpp \
+    pathbarview.cpp
 
 HEADERS  += mainwindow.h \
     tabbutton.h \
     tabcontenttreeview.h \
-    tabscontroller.h
+    tabscontroller.h \
+    pathbarview.h
 
 FORMS    += mainwindow.ui
 

@@ -1,7 +1,7 @@
 #ifndef CONTROLLERTABS_H
 #define CONTROLLERTABS_H
 
-#include <QObject>
+#include <QWidget>
 
 class QLayout;
 
@@ -9,7 +9,7 @@ namespace qp
 {
 class TabButton;
 
-class TabsController : public QObject
+class TabsController : public QWidget
 {
     Q_OBJECT
 

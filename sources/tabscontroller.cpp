@@ -7,7 +7,7 @@
 #include <QStyle>
 
 qp::TabsController::TabsController(QLayout *ip_layout_tabs)
-    : QObject(ip_layout_tabs)
+    : QWidget(ip_layout_tabs->widget())
     , mp_layout_tabs(ip_layout_tabs)
     , mp_active_tab_left(nullptr)
     , mp_active_tab_right(nullptr)

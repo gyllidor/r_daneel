@@ -25,7 +25,14 @@ QString qp::TabButton::getPath() const
 void qp::TabButton::setPath(const QString &i_path)
 {
     setObjectName(i_path);
-    setText(QDir::rootPath() != i_path ? QFileInfo(i_path).baseName() : QDir::rootPath());
+
+    QFontMetrics metrics(fontMetrics());
+    const auto text = QDir::rootPath() != i_path ? QFileInfo(i_path).baseName() : QDir::rootPath();
+
+    const auto w = width();
+    const auto str = metrics.elidedText(text, Qt::ElideMiddle, width());
+
+    setText(metrics.elidedText(text, Qt::ElideMiddle, width()));
 }
 
 void qp::TabButton::setActivatedBy(int i_activated_by)

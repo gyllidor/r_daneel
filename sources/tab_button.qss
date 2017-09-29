@@ -24,3 +24,8 @@ qp--TabButton[m_activated_by="3"]
 {
     background-color: green;
 }
+
+QScrollArea#scrollArea
+{
+    border: none;
+}
